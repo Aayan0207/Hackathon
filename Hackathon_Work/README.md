@@ -1,5 +1,5 @@
 # Explorer's Cove 
-## 1. Import the zip file into VSCode and extract the files or download this repositories files
+## 1. Import the zip file into VSCode and extract the files or download this repository's files
 ## 2. Setting up Hackathon.sql
 ### Once the zip file is downloaded and extracted or the repository files are downloaded, open MySQL on your system and run the following commands
 #### CREATE DATABASE Hackathon;
