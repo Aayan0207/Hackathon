@@ -3,7 +3,7 @@
 ## 2. Setting up Hackathon.sql
 ### Once the zip file is downloaded and extracted or the repository files are downloaded, open MySQL on your system and run the following commands
 #### CREATE DATABASE Hackathon;
-##### Name for the database can be something else but a change would be #required in the app.py then
+##### Name for the database can be something else but a change would be required in the app.py then
 #### USE Hackathon;
 ### Then open the command prompt and run this command:
 #### “mysql_command_path” -u username -p Hackathon < “path_of_Hackathon.sql”
