@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login/Register</title>
+    <link rel="icon" href="static/Jellyfish.png" type="image/x-icon">
+    <style>
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: fixed; 
+            top: 0; 
+            background-color: rgba(1, 56, 106, 0.8);
+            z-index: 1000; 
+        }
+        * {
+            box-sizing: border-box;
+            }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .user-section {
+            justify-content: space-between;
+            padding: 16px 20px;
+            margin-left: auto;
+            gap: 20px;
+        }
+        body{
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 100vh;
+            font-family: Hack, monospace;
+            background-image: linear-gradient(to bottom right, #2E8B57,#40a48e, #006994,#0c4f6b); 
+        }
+        a {
+            color: #54E0CA;
+            font-size: 20px;
+            text-decoration: none;
+            margin: 15px 0;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 400;
+            transition: all 0.5s ease-in-out;
+            position: relative;
+            text-transform: uppercase;
+    }
+    a::after{
+        transition: width 0.5s ease;
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px; 
+        background: #54E0CA; 
+        position: absolute;
+        left: 0;
+    }
+    a::before{
+        content: attr(data-item);
+        transition: 0.5s;
+        color: #8254ff;
+        position: absolute;
+        top: 10000000000000000;
+        bottom: 10000000;
+        left: 0;
+        right: 0;
+        width: 0;
+        overflow: hidden;
+    }
+    a:hover::before{
+        width: 100%;
+        transition: all 0.5s ease-in-out;
+    }
+    a:hover::after{
+        width:100%;
+    }
+        p{
+            font-size:20px;
+        }
+        #logout{
+            display:none;
+        }
+        #login{
+            display:none;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        checkbox-container input[type='checkbox'] {
+            margin-right: 5px; 
+        }
+        .checkbox-container label {
+            white-space: nowrap;
+            margin-left: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/tasks">Tasks</a>
+            <a href="/discuss">Discuss</a>
+        </div>
+        <div class="user-section">
+            <p id="user" style="display:inline;padding-right:10px;color:white;">User: {{user}} </p>
+            <a href="/login" id="login">Login</a>
+            <a href="/logout" id='logout'>Logout</a>
+        </div>
+    </header>
+    <p id="text_string"></p>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form action="/register" method="post" id="sign_up">
+            <h1>Create Account</h1>
+            <input type="text" placeholder="Username" name="username_reg" autocomplete="off" required/>
+            <input type="password" placeholder="Password" name="password_reg" id="password_reg" required/>
+			<input type="password" placeholder="Confirm password" name="repassword" id="repassword" required/>
+            <div class='checkbox-container'>
+            <input type='checkbox' onclick="show_password_reg()" id="show_pass_reg">
+            <label for="show_pass_reg">Show Password</label>
+            </div>
+            <br>
+            <button type="submit" value="Sign Up" name="submit">Let's Go</button>
+            <br>
+            <button type='reset' value='Reset' name='reset'>Reset</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form action="/login" method="post" id="sign_in">
+            <h1>Log In</h1>
+			<input type="text" placeholder="Username" name="username_log" autocomplete="off" required/>
+            <input type="password" placeholder="Password" name="password_log" id="password_log" required/>
+            <div class='checkbox-container'>
+            <input type='checkbox' onclick="show_password_log()" id="show_pass_log">
+            <label for="show_pass_log" style="display:inline;">Show Password</label>
+            </div>
+            <br>
+            <button type="submit" value="Sign In" name="submit">Submit</button>
+            <br>
+            <button type='reset' value='Reset' name='reset'>Reset</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your details and start your journey with us</p>
+                <p>Sign In instead?</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your information</p>
+                <p>Register instead?</p>
+                <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var password_reg=document.getElementById('password_reg');
+    var confirmation_reg=document.getElementById('repassword');
+    var password_log=document.getElementById('password_log');
+
+    $(document).ready(function() {
+        $('#sign_in').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    document.getElementById('text_string').innerHTML=response.string;
+                    if (response.string==="Login Successful"){
+                        document.getElementById('logout').style.display='inline';
+                        document.getElementById('user').innerHTML="User: "+response.user;
+                        window.location.href="/";
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ', status, error);
+                }
+        });
+    });    
+});
+    $(document).ready(function() {
+        $('#sign_up').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    document.getElementById('text_string').innerHTML=response.string;
+                    if (response.string==="Registration Successful"){
+                        document.getElementById('logout').display='inline';
+                        document.getElementById('user').innerHTML="User: "+response.user;
+                        window.location.href="/";
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ', status, error);
+                }
+        });
+    });    
+    });
+    function show_password_log(){
+        if (password_log.type==='password'){
+            password_log.type="text";
+        }
+        else{
+            password_log.type="password";
+        }
+    }
+    function show_password_reg(){
+        if (password_reg.type==='password'){
+            password_reg.type='text';
+            confirmation_reg.type='text';
+        } 
+        else{
+            confirmation_reg.type='password';
+            password_reg.type='password';
+        }
+    }
+    
+</script>
+<!-- Link to the JavaScript file -->
+<script src="static/login.js"></script>
+</body>
+</html>
