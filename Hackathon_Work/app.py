@@ -16,7 +16,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root", #Change username accordingly please
     password="Leonardo@28", #Updated password for user
-    database="hackathon" #Incase name wasn't kept as hackathon while setup kindly change this to the new name
+    database="hackathon" #In case name wasn't kept as hackathon while setup kindly change this to the new name
 )
 cursor_log = mydb.cursor()
 cursor_discuss = mydb.cursor()
@@ -133,7 +133,7 @@ def login():
 @app.route('/delete_task',methods=['POST'])
 def delete():
     author=request.values.get('del_author').strip(':')
-    task=request.values.get('del_task')
+    task=request.values.get('del_task').strip()
     urgency=request.values.get('del_urgency')
     cursor_tasks.execute('DELETE FROM tasks WHERE author=%s AND tasks=%s AND urgency=%s',(author,task,urgency))
     mydb.commit()

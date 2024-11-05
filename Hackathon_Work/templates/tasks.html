@@ -9,23 +9,74 @@
         <title>Tasks</title>
         <link rel="icon" href="static/Jellyfish.png" type="image/x-icon">
         <style>
+            #tasks_chat td:nth-child(1){
+                border:4px solid black;
+                background-color:#4a90e2;
+                padding: 6px 16px;
+                margin: 6px;
+            }
+            #tasks_chat td:nth-child(2){
+                border:4px solid black;
+                background-color:#50c878;
+                padding: 6px 16px;
+                margin: 6px;
+            }
+            #tasks_chat td:nth-child(3){
+                border:4px solid black;
+                background-color:gold;
+                padding: 6px 16px;
+                margin: 6px;
+            }
+            #tasks_chat td:nth-child(4){
+                border:4px solid black;
+                background-color:#ff6b6b;
+                padding: 6px 16px;
+                margin: 6px;
+                cursor:pointer;
+            }
             #logout{
                 display:none;
             }
-            .author{
-                background-color:blue;
-            }
-            .des_tasks{
-                background-color:green;
-            }
-            .des_urgency{
-                background-color:red;
-            }
-            .des_tasks_form{
-                cursor:pointer;
-            }
             #delete_task{
                 display:none;
+            }
+            #tasks_form{
+                margin-top:20px;
+                position: fixed;
+                bottom: 30px;
+                left: 30px;
+                right: 30px;
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            #tasks_chat{
+                table-layout: fixed;
+                border-spacing: 15px 15px;
+                width: 80%;
+                margin:auto;
+                margin-top: 40px;
+                padding-top: 60px;
+            }
+            #tasks_chat tr {
+                margin-bottom: 15px;
+                text-align: center;
+                overflow: hidden;
+            }
+            #tasks_chat td {
+                padding: 15px 20px;
+                text-align: center;
+                word-wrap: break-word;
+            }
+            #tasks_chat th{
+                margin: 10px;
+                text-align: center;
+                overflow: hidden;
+                position: sticky; 
+                top: 0; 
+                background-color: #f0f0f0;
+                z-index: 1; 
             }
             p{
                 font-size:20px;
@@ -104,6 +155,25 @@
                 min-height: 100vh;
                 font-family: Hack, monospace;
                 background-image: linear-gradient(to bottom right, #2E8B57,#40a48e, #006994,#0c4f6b); 
+                overflow-y: auto;
+            padding-bottom:200px;
+        }
+        #submit{
+            border-radius:8px;
+            background-color:#06402B;
+            color:#54E0CA;
+            padding: 6px 6px;
+        }
+        #task{
+            border-radius:8px;
+            background-color:#40e0d0;
+            padding: 6px 6px;
+        }
+        #urgency{
+            border-radius:8px;
+            background-color:#06402B;
+            color:#54E0CA;
+            padding: 6px 6px;
         }
         </style>
     </head>
@@ -126,6 +196,7 @@
                     <td>Author</td>
                     <td>Task</td>
                     <td>Urgency</td>
+                    <td>Finish Task</td>
                 </tr>
             </thead>
         	<tbody>
@@ -140,8 +211,8 @@
         	</tbody>
         </table>
         <form action="/tasks" method="post" id="tasks_form">
-        <input type="text" name="task" id="task" placeholder="Enter Task" autocomplete="off" maxlength='255' size='100'>
-        <label for='urgency'>Urgency:</label>
+        <input type="text" name="task" id="task" placeholder="Enter Task" autocomplete="off" maxlength='255' size='100' autofocus>
+        <label for='urgency' style="font-size:20px;"><b>Urgency:</b></label>
         <select name='urgency' id='urgency'>
             {% for i in range(1,6) %}
             <option>{{i}}</option>
