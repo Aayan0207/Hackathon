@@ -1,5 +1,5 @@
 # Explorer's Cove 
-# Project Overview Video: [Demo](https://www.canva.com/design/DAGVtOZd9nA/fOgjC65wepn8XkXWqUbTeQ/watch?utm_content=DAGVtOZd9nA&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+# Project Overview Pitch Deck: [PPT](https://www.canva.com/design/DAGVmGC8Bco/hLHtFHteQgzxSFH6Y1lTEQ/view?utm_content=DAGVmGC8Bco&utm_campaign=designshare&utm_medium=link&utm_source=editor#3)
 ## 1. Import the zip file into VSCode and extract the files or download this repository's files
 ## 2. Setting up Hackathon.sql
 ### Once the zip file is downloaded and extracted or the repository files are downloaded, open MySQL on your system and run the following commands
