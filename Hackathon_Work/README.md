@@ -12,5 +12,5 @@
 ###### You will prompted for the password of the username and after that the sql file will create the DB in MYSQL
 ## 3. App.py
 #### In line 15, kindly update the user, password and database variables accordingly.
-[Image](https://drive.google.com/file/d/1-Dxh5aOWbkf4vB2UsKSVRnnkZpFCHrgX/view?usp=drive_link)
+#### [Image](https://drive.google.com/file/d/1-Dxh5aOWbkf4vB2UsKSVRnnkZpFCHrgX/view?usp=drive_link)
 ## 4. Ensuring the working directory is correct, execute the command: flask run in the VSCode terminal and click the corresponding link given.
